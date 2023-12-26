@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Assigning Form</title>
+    <link rel="stylesheet" href="tablestyle.css">
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        table {
+            margin-top: 20px
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form id="taskForm">
+            <h2>Task Assigning Form</h2>
+
+            <label for="name">Name:</label>
+            <input type="text" placeholder="YOUR NAME" id="name" name="name" required>
+
+            <label for="task">Task:</label>
+            <input type="text" placeholder="Task" id="task" name="task" required>
+
+            <label for="taskfor">Task for:</label>
+            <input type="text" placeholder="Name" id="taskfor" name="taskfor" required>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+
+            <label for="Description">Task Description:</label>
+            <textarea id="Description" name="Description" required></textarea>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div class="hidden">
+        <table id="taskTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Task</th>
+                    <th>Task for</th>
+                    <th>Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <script src="hello.ts"></script>
+</body>
+
+</html>

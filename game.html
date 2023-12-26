@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario-like Platformer</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            background-color: #63a0ef;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Mario properties
+        const mario = {
+            x: 50,
+            y: 450,
+            width: 50,
+            height: 50,
+            color: '#ff0000',
+            velocityX: 0,
+            velocityY: 0,
+            jumping: false
+        };
+
+        // Ground properties
+        const ground = {
+            x: 0,
+            y: canvas.height - 20,
+            width: canvas.width,
+            height: 20,
+            color: '#00ff00'
+        };
+
+        // Update game state
+        function update() {
+            // Update Mario's position based on velocity
+            mario.x += mario.velocityX;
+            mario.y += mario.velocityY;
+
+            // Apply gravity
+            mario.velocityY += 1;
+
+            // Check for collisions with the ground
+            if (mario.y > ground.y - mario.height) {
+                mario.y = ground.y - mario.height;
+                mario.velocityY = 0;
+                mario.jumping = false;
+            }
+
+            // Check for keyboard input to make Mario jump
+            document.addEventListener('keydown', function (event) {
+                if (event.code === 'Space' && !mario.jumping) {
+                    mario.velocityY = -15; // Jumping velocity
+                    mario.jumping = true;
+                }
+            });
+        }
+
+        // Draw Mario
+        function drawMario() {
+            ctx.fillStyle = mario.color;
+            ctx.fillRect(mario.x, mario.y, mario.width, mario.height);
+        }
+
+        // Draw the ground
+        function drawGround() {
+            ctx.fillStyle = ground.color;
+            ctx.fillRect(ground.x, ground.y, ground.width, ground.height);
+        }
+
+        // Main game loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            update();
+            drawMario();
+            drawGround();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Start the game loop
+        gameLoop();
+    </script>
+</body>
+
+</html>
